@@ -1,125 +1,222 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GTA6 Release</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTA6 Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
+      height: 100vh;
+      background: url(https://pbs.twimg.com/media/GqRXFJkXUAABwtJ?format=jpg&name=4096x4096) center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: #121212;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #000000;
-      margin: 0;
-      background-image: url(https://pbs.twimg.com/media/GqRXFJkXUAABwtJ?format=jpg&name=4096x4096);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffffff;
+      animation: fadeIn 2s ease-in-out, pulseBg 10s infinite alternate;
+      transition: background 0.3s ease;
     }
 
-    .contador {
-  text-align: center;
-  font-size: 3rem;
-  background: transparent;
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  box-shadow: none; /* Opcional: quita la sombra si no la quieres */
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
+    @keyframes pulseBg {
+      0% { filter: brightness(100%); }
+      100% { filter: brightness(110%); }
+    }
 
-    .tiempo {
+    .countdown {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      max-width: 90%;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    .countdown h1 {
+      margin-bottom: 2rem;
+      font-size: 3rem;
+      color: #39ff14;
+      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+    }
+
+    .timer {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 2rem;
     }
 
-    .tiempo div {
+    .timer div {
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: transform 0.3s ease;
     }
 
-    .tiempo span {
-      font-size: 2rem;
+    .timer div:hover {
+      transform: scale(1.1);
+    }
+
+    .timer span {
+      font-size: 2.8rem;
       font-weight: bold;
+      color: #ffffff;
     }
 
-    .etiqueta {
+    .label {
       font-size: 1rem;
       margin-top: 0.5rem;
-      color: #000000;
+      color: #aaa;
     }
 
-    .autor {
-        font-size: 1rem;
-        color: #000000;
-        margin-top: 1rem;
+    .author {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      opacity: 0.8;
     }
 
-    .boton-youtube {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #ff0000;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-}
+    .youtube-button,
+    .dark-mode-btn {
+      position: fixed;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-.boton-youtube:hover {
-  background-color: #cc0000;
-}
+    .youtube-button {
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff0000;
+    }
 
+    .youtube-button:hover {
+      background-color: #cc0000;
+    }
+
+    .dark-mode-btn {
+      bottom: 20px;
+      left: 20px;
+      background-color: #333;
+    }
+
+    .dark-mode-btn:hover {
+      background-color: #111;
+    }
+
+    body.dark-mode {
+      background: url('https://pbs.twimg.com/media/GqXyNKTXIAAyuIB?format=jpg&name=large') center/cover no-repeat;
+    }
+
+    @media (max-width: 600px) {
+      .countdown h1 {
+        font-size: 2rem;
+      }
+
+      .timer {
+        gap: 1rem;
+      }
+
+      .timer span {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="contador">
+  <main class="countdown" role="region" aria-label="GTA6 countdown">
     <h1>GTA6 Release</h1>
-    <div class="tiempo">
-      <div><span id="dias">00</span><div class="etiqueta">Days</div></div>
-      <div><span id="horas">00</span><div class="etiqueta">Hours</div></div>
-      <div><span id="minutos">00</span><div class="etiqueta">Minutes</div></div>
-      <div><span id="segundos">00</span><div class="etiqueta">Seconds</div></div>
-    </div>
-    <div class="autor">Create by ottov2</div>
-  </div>
+    <section class="timer">
+      <div><span id="days">00</span><div class="label">Days</div></div>
+      <div><span id="hours">00</span><div class="label">Hours</div></div>
+      <div><span id="minutes">00</span><div class="label">Minutes</div></div>
+      <div><span id="seconds">00</span><div class="label">Seconds</div></div>
+    </section>
+    <div class="author">Created by ottov2 🚀</div>
+  </main>
 
-  <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" class="boton-youtube">
-    trailer 2
+  <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" class="youtube-button" aria-label="Watch trailer on YouTube">
+    🎬 Trailer 2
   </a>
 
+  <button class="dark-mode-btn" onclick="document.body.classList.toggle('dark-mode')">
+    🌙 change image
+  </button>
+
   <script>
-    const objetivo = new Date("2026-05-26T23:59:59").getTime();
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const container = document.querySelector(".countdown");
 
-    const actualizarCuentaAtras = () => {
-      const ahora = new Date().getTime();
-      const diferencia = objetivo - ahora;
+    const targetDate = new Date("2026-05-26T23:59:59").getTime();
 
-      if (diferencia < 0) {
-        document.querySelector('.contador').innerHTML = "<h1>¡Tiempo terminado!</h1>";
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        container.innerHTML = "<h1>GTA6 is Now Available!</h1>";
+        launchConfetti();
         return;
       }
 
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById("dias").textContent = String(dias).padStart(2, '0');
-      document.getElementById("horas").textContent = String(horas).padStart(2, '0');
-      document.getElementById("minutos").textContent = String(minutos).padStart(2, '0');
-      document.getElementById("segundos").textContent = String(segundos).padStart(2, '0');
-    };
+      daysEl.textContent = String(days).padStart(2, '0');
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minutesEl.textContent = String(minutes).padStart(2, '0');
+      secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
 
-    setInterval(actualizarCuentaAtras, 1000);
-    actualizarCuentaAtras(); // Ejecuta al cargar
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function launchConfetti() {
+      const duration = 3000;
+      const end = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+      function randomRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(() => {
+        const timeLeft = end - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        confetti(Object.assign({}, defaults, {
+          particleCount: 50,
+          origin: {
+            x: randomRange(0.1, 0.9),
+            y: Math.random() - 0.2
+          }
+        }));
+      }, 250);
+    }
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
