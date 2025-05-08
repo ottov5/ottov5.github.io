@@ -2,167 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GTA6 Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyberpunk Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
       height: 100vh;
-      background: url(https://pbs.twimg.com/media/GqRXFJkXUAABwtJ?format=jpg&name=4096x4096) center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Orbitron', sans-serif;
-      color: #ffffff;
-      animation: fadeIn 2s ease-in-out, pulseBg 10s infinite alternate;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      color: #0ff;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
     }
 
-    @keyframes pulseBg {
-      0% { filter: brightness(100%); }
-      100% { filter: brightness(110%); }
+    .glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #0ff2, transparent);
+      animation: pulse 6s infinite ease-in-out;
+      z-index: 0;
     }
 
-    .countdown {
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+
+    .container {
+      z-index: 2;
       text-align: center;
-      background: rgba(0, 0, 0, 0.65);
-      padding: 2rem 3rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 3rem;
       border-radius: 1rem;
-      max-width: 90%;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      box-shadow: 0 0 40px #0ff6;
+      backdrop-filter: blur(6px);
     }
 
-    .countdown h1 {
-      margin-bottom: 2rem;
+    h1 {
       font-size: 3rem;
-      color: #39ff14;
-      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+      margin-bottom: 2rem;
+      color: #0ff;
+      text-shadow: 0 0 15px #0ff;
     }
 
     .timer {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 2rem;
+      font-size: 2rem;
     }
 
     .timer div {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
-    }
-
-    .timer div:hover {
-      transform: scale(1.1);
     }
 
     .timer span {
-      font-size: 2.8rem;
-      font-weight: bold;
-      color: #ffffff;
+      font-size: 3rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
     }
 
     .label {
-      font-size: 1rem;
-      margin-top: 0.5rem;
+      font-size: 0.9rem;
       color: #aaa;
     }
 
-    .author {
-      margin-top: 1.5rem;
-      font-size: 1rem;
-      opacity: 0.8;
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #777;
     }
 
-    .youtube-button,
-    .dark-mode-btn {
-      position: fixed;
+    .btn {
+      margin-top: 1rem;
+      display: inline-block;
+      background: #0ff;
+      color: #000;
       padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
+      border-radius: 0.5rem;
       font-weight: bold;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 10px #0ff8;
+      transition: background 0.3s ease;
     }
 
-    .youtube-button {
-      bottom: 20px;
-      right: 20px;
-      background-color: #ff0000;
-    }
-
-    .youtube-button:hover {
-      background-color: #cc0000;
-    }
-
-    .dark-mode-btn {
-      bottom: 20px;
-      left: 20px;
-      background-color: #333;
-    }
-
-    .dark-mode-btn:hover {
-      background-color: #111;
-    }
-
-    body.dark-mode {
-      background: url('https://pbs.twimg.com/media/GqXyNKTXIAAyuIB?format=jpg&name=large') center/cover no-repeat;
-    }
-
-    @media (max-width: 600px) {
-      .countdown h1 {
-        font-size: 2rem;
-      }
-
-      .timer {
-        gap: 1rem;
-      }
-
-      .timer span {
-        font-size: 2rem;
-      }
+    .btn:hover {
+      background: #0cc;
     }
   </style>
 </head>
 <body>
-  <main class="countdown" role="region" aria-label="GTA6 countdown">
-    <h1>GTA6 Release</h1>
-    <section class="timer">
+  <!-- Música de fondo -->
+<!--<audio autoplay loop>
+  <source src="unknown.mp3" type="audio/mp3">
+  Tu navegador no soporta la etiqueta de audio.
+</audio>-->
+
+
+  <div class="glow"></div>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <h1>GTA 6 Countdown</h1>
+    <div class="timer">
       <div><span id="days">00</span><div class="label">Days</div></div>
       <div><span id="hours">00</span><div class="label">Hours</div></div>
       <div><span id="minutes">00</span><div class="label">Minutes</div></div>
       <div><span id="seconds">00</span><div class="label">Seconds</div></div>
-    </section>
-    <div class="author">Created by ottov2 🚀</div>
-  </main>
-
-  <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" class="youtube-button" aria-label="Watch trailer on YouTube">
-    🎬 Trailer 2
-  </a>
-
-  <button class="dark-mode-btn" onclick="document.body.classList.toggle('dark-mode')">
-    🌙 change image
-  </button>
+    </div>
+    <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" class="btn">▶ Watch Trailer</a>
+    <div class="footer">Create by ottov2⚡</div>
+  </div>
 
   <script>
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
-    const container = document.querySelector(".countdown");
 
     const targetDate = new Date("2026-05-26T23:59:59").getTime();
 
@@ -171,8 +146,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        container.innerHTML = "<h1>GTA6 is Now Available!</h1>";
-        launchConfetti();
+        document.querySelector('.container').innerHTML = "<h1>THE FUTURE IS NOW</h1>";
         return;
       }
 
@@ -189,34 +163,6 @@
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    function launchConfetti() {
-      const duration = 3000;
-      const end = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
-
-      function randomRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      const interval = setInterval(() => {
-        const timeLeft = end - Date.now();
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval);
-        }
-
-        confetti(Object.assign({}, defaults, {
-          particleCount: 50,
-          origin: {
-            x: randomRange(0.1, 0.9),
-            y: Math.random() - 0.2
-          }
-        }));
-      }, 250);
-    }
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
