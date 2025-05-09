@@ -15,12 +15,13 @@
     body {
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
       color: #0ff;
+      padding: 1rem;
     }
 
     .overlay {
@@ -49,15 +50,17 @@
       z-index: 2;
       text-align: center;
       background: rgba(0, 0, 0, 0.6);
-      padding: 3rem;
+      padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 40px #0ff6;
       backdrop-filter: blur(6px);
+      width: 90%;
+      max-width: 600px;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
       color: #0ff;
       text-shadow: 0 0 15px #0ff;
     }
@@ -65,8 +68,9 @@
     .timer {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      font-size: 2rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 1.5rem;
     }
 
     .timer div {
@@ -76,7 +80,7 @@
     }
 
     .timer span {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: #0ff;
       text-shadow: 0 0 10px #0ff;
     }
@@ -93,7 +97,7 @@
     }
 
     .btn {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       display: inline-block;
       background: #0ff;
       color: #000;
@@ -108,15 +112,31 @@
     .btn:hover {
       background: #0cc;
     }
+
+    /* Estilo responsive para móviles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .timer {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .timer span {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Música de fondo -->
-<!--<audio autoplay loop>
-  <source src="unknown.mp3" type="audio/mp3">
-  Tu navegador no soporta la etiqueta de audio.
-</audio>-->
-
 
   <div class="glow"></div>
   <div class="overlay"></div>
